@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const { json, urlencoded } = express;
 
 const app = express();
-mongoose.connect('mongodb+srv://admin:admin@xom-chill.s14kzvs.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@xom-chill.s14kzvs.mongodb.net/?retryWrites=true&w=majority`,
     function() {
         console.log("Databse connected");
     }
