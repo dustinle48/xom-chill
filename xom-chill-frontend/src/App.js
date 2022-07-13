@@ -17,9 +17,8 @@ import { Header } from "./components/Header";
 
 import { theme } from "./themes/theme";
 
-
 const env = process.env.NODE_ENV !== "production";
-axios.defaults.baseURL = env ? "http://localhost:5000/" : "";
+axios.defaults.baseURL = env ? "http://localhost:5000/" : "https://xom-chill-backend.herokuapp.com/";
 
 function App() {
   const navigate = useNavigate();
