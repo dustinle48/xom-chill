@@ -17,8 +17,8 @@ import { Header } from "./components/Header";
 
 import { theme } from "./themes/theme";
 
-const env = process.env.NODE_ENV !== "production";
-axios.defaults.baseURL = env ? "http://localhost:5000/" : "https://xom-chill-backend.herokuapp.com/";
+//const env = process.env.NODE_ENV !== "production";
+axios.defaults.baseURL = /* env ? "http://localhost:5000/" : */ "https://xom-chill-backend.herokuapp.com/";
 
 function App() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function App() {
       setUser(jwtDecode(data.token));
       navigate("/");
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   };
 
@@ -68,6 +68,8 @@ function App() {
           <Route path="/" element={ <Home articles={articles} /> } />
           <Route path="/login" element={ <Login login={login} /> } />
           <Route path="/register" element={ <Register /> } />
+          {/* <Route path="/about" element={ <About /> } /> */}
+          
           <Route path="/article/:id" element={ <Article articles={articles} /> } />
 
           <Route path="/article/new" element={ <ArticleNew /> } />

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const sha256 = require("crypto-js/sha256");
 
 exports.find = async function(req, res) {
     try {
@@ -25,7 +26,7 @@ exports.create = async function(req, res) {
     const user = new User({
         userName: req.body.userName,
         email: req.body.email,
-        password: req.body.password,
+        password: sha256(req.body.password),
     })
     try {
         const newUser = await user.save();
@@ -45,7 +46,7 @@ exports.login = async function(req, res, next) {
 
         if(!user) {
             res.status(401).json({ error: "Wrong email." });
-        } else if(password !== user.password) {
+        } else if(sha256(password) !== user.password) {
             res.status(401).json({ error: "Wrong password." });
         } else {
             const token = jwt.sign(
